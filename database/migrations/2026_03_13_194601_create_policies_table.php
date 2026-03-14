@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('policies', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('quote_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('insurance_product_id')->constrained()->cascadeOnDelete();
+
+            $table->string('policy_number')->unique();
+            $table->date('effective_date');                                 
             $table->timestamps();
         });
     }

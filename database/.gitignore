@@ -1,2 +1,17 @@
+/vendor/
+/node_modules/
+/storage/*.key
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+/public/build
+/public/storage
+/public/hot
+Homestead.yaml
+Homestead.json
+/.vagrant
+auth.json
+
 *.sqlite*
 .env
