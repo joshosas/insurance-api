@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('insurance_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('insurance_product_id')->constrained()->cascadeOnDelete();
             $table->decimal('estimated_premium', 10, 2);
             $table->string('status')->default('pending');
             $table->timestamps();
