@@ -14,7 +14,7 @@ class Policy extends Model
         'quote_id',
         'insurance_product_id',
         'policy_number',
-        'efective_date'
+        'effective_date'
         ];
 
         public function user()
