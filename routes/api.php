@@ -1,29 +1,39 @@
 <?php
 // routes/api.php
 
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\PolicyController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\QuoteController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\PolicyController;
+use App\Http\Controllers\Api\AuthController;
 
 
-
-Route::get('/test', function() {
-    return response()->json([
-        'message' => 'Hey! just checking if my API is working'
-    ]);
-});
-
-Route::get('/products', [ProductController::class,'index']);
-
-Route::get('/quotes', [QuoteController::class,'index']);
-Route::post('/quotes', [QuoteController::class,'store']);
-
-Route::get('/policies', [PolicyController::class, 'index']);
-Route::post('/policies', [PolicyController::class,'store']);
+/*
+|--------------------------------------------------------------------------
+| Public Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::post('/register', [AuthController::class,'register']);
 Route::post('/login', [AuthController::class,'login']);
-Route::post('/logout', [AuthController::class,'logout'])->middleware('auth:sanctum');
+
+Route::get('/products', [ProductController::class,'index']);
+
+
+/*
+|--------------------------------------------------------------------------
+| Protected Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::post('/logout', [AuthController::class,'logout']);
+
+    Route::get('/quotes', [QuoteController::class,'index']);
+    Route::post('/quotes', [QuoteController::class,'store']);
+
+    Route::get('/policies', [PolicyController::class,'index']);
+    Route::post('/policies', [PolicyController::class,'store']);
+
+});
